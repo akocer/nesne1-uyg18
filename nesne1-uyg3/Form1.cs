@@ -1,4 +1,6 @@
 
+using System.Windows.Forms;
+
 namespace nesne1_uyg3
 
 {
@@ -34,6 +36,8 @@ namespace nesne1_uyg3
                 dgKayitlar.Rows.Add(sira, parcala[0], parcala[1], parcala[2], parcala[3]);
                 sira++;
             }
+            sr.Close();
+            fs.Close();
         }
 
         private void btnHesapla_Click(object sender, EventArgs e)
@@ -58,6 +62,46 @@ namespace nesne1_uyg3
                 dgKayitlar.Rows[i].Cells[5].Value = ort.ToString("0.00");
                 dgKayitlar.Rows[i].Cells[6].Value = sonuc.ToString();
             }
+        }
+
+        private void btnKaydet_Click(object sender, EventArgs e)
+        {
+            if (dgKayitlar.RowCount == 0)
+            {
+                MessageBox.Show("Kayýt bulunamadý!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            saveFileDialog1.FileName = "sonuc.csv";
+            saveFileDialog1.Filter = "CSV Dosyalarý |*.csv";
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write);
+            sw = new StreamWriter(fs,System.Text.Encoding.UTF8);
+            for (int i = 0; i < dgKayitlar.RowCount; i++)
+            {
+                satir = "";
+                for (int j = 1; j < dgKayitlar.ColumnCount; j++)
+                {
+                    satir += dgKayitlar.Rows[i].Cells[j].Value.ToString() + ";";
+                }
+                sw.WriteLine(satir);
+            }
+            sw.Close();
+            fs.Close();
+
+            if (MessageBox.Show("Sonuçlar Dosyaya Yazýldý Açýlsýn mý?","Onay",MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                return;
+            }
+
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.FileName = saveFileDialog1.FileName;
+            p.StartInfo.UseShellExecute = true;
+            p.Start();
         }
     }
 }

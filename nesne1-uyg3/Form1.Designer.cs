@@ -80,6 +80,7 @@
             btnKaydet.TabIndex = 0;
             btnKaydet.Text = "Kaydet";
             btnKaydet.UseVisualStyleBackColor = true;
+            btnKaydet.Click += btnKaydet_Click;
             // 
             // btnHesapla
             // 
@@ -123,6 +124,7 @@
             Column1.HeaderText = "SN";
             Column1.MinimumWidth = 8;
             Column1.Name = "Column1";
+            Column1.ReadOnly = true;
             Column1.Width = 50;
             // 
             // Column2
@@ -130,6 +132,7 @@
             Column2.HeaderText = "Öğrenci No";
             Column2.MinimumWidth = 8;
             Column2.Name = "Column2";
+            Column2.ReadOnly = true;
             Column2.Width = 150;
             // 
             // Column3
@@ -137,6 +140,7 @@
             Column3.HeaderText = "Adı Soyadı";
             Column3.MinimumWidth = 8;
             Column3.Name = "Column3";
+            Column3.ReadOnly = true;
             Column3.Width = 250;
             // 
             // Column4
@@ -158,6 +162,7 @@
             Column6.HeaderText = "Ort";
             Column6.MinimumWidth = 8;
             Column6.Name = "Column6";
+            Column6.ReadOnly = true;
             Column6.Width = 150;
             // 
             // Column7
@@ -165,6 +170,7 @@
             Column7.HeaderText = "Sonuç";
             Column7.MinimumWidth = 8;
             Column7.Name = "Column7";
+            Column7.ReadOnly = true;
             Column7.Width = 150;
             // 
             // openFileDialog1
@@ -192,6 +198,12 @@
 
         private Panel panel1;
         private DataGridView dgKayitlar;
+        private SaveFileDialog saveFileDialog1;
+        private OpenFileDialog openFileDialog1;
+        private Button btnKapat;
+        private Button btnKaydet;
+        private Button btnHesapla;
+        private Button btnAc;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
@@ -199,12 +211,6 @@
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
         private DataGridViewTextBoxColumn Column7;
-        private SaveFileDialog saveFileDialog1;
-        private OpenFileDialog openFileDialog1;
-        private Button btnKapat;
-        private Button btnKaydet;
-        private Button btnHesapla;
-        private Button btnAc;
     }
 
 }
